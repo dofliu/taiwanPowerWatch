@@ -25,6 +25,21 @@ jobs:
         run: npx capacitor-assets generate --android --iconBackgroundColor '#0a2a3a' --iconBackgroundColorDark '#06212e' --splashBackgroundColor '#0a2a3a' --splashBackgroundColorDark '#0a2a3a'
       - name: Sync web assets
         run: npx cap sync android
+      # background-runner 附帶的 android-js-engine-release.aar 只在外掛模組的
+      # flatDir 宣告，:app 解析 runtime classpath 時找不到（外掛已知問題），
+      # 補進根 build.gradle 的 allprojects 讓所有模組都能解析
+      - name: Fix background-runner AAR resolution
+        run: |
+          cat >> android/build.gradle <<'EOF'
+
+          allprojects {
+              repositories {
+                  flatDir {
+                      dirs "${rootProject.projectDir}/../node_modules/@capacitor/background-runner/android/src/main/libs"
+                  }
+              }
+          }
+          EOF
       - name: Build debug APK
         run: cd android && ./gradlew assembleDebug --no-daemon
       - name: Upload APK artifact
