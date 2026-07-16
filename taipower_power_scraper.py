@@ -71,7 +71,7 @@ GROUP_RULES = [
     ("nuclear", ("Nuclear", "核能")),
     ("coal",    ("Coal", "燃煤")),
     ("lng",     ("LNG", "燃氣")),
-    ("oil",     ("Oil", "Diesel", "燃油", "輕油", "重油")),
+    ("oil",     ("Oil", "Diesel", "燃料油", "燃油", "輕油", "重油")),
     ("cogen",   ("Co-Gen", "CoGen", "汽電共生")),
     ("wind",    ("Wind", "風力")),
     ("solar",   ("Solar", "太陽能", "太陽光電")),

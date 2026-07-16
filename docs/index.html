@@ -133,7 +133,7 @@ function paint(){
   const keys=ORDER.filter(k=>g[k]);
   document.getElementById("cgrid").innerHTML=keys.map(k=>{
     const v=g[k],neg=v.mw<0;
-    const pc=v.cap_mw>0&&v.mw>0?`容量 ${fmt(v.cap_mw)} MW · 使用 ${(v.mw/v.cap_mw*100).toFixed(0)}%`:(neg?"抽水/充電中（負值＝用電）":`${v.units} 部機組`);
+    const pc=v.cap_mw>0&&v.mw>0&&v.mw<=v.cap_mw*1.05?`容量 ${fmt(v.cap_mw)} MW · 使用 ${(v.mw/v.cap_mw*100).toFixed(0)}%`:(neg?"抽水/充電中（負值＝用電）":`${v.units>1?v.units+" 部機組":"容量未完整揭露"}`);
     return `<div class="card" data-k="${k}"><div class="nm"><i style="background:${COLORS[k]}"></i>${(labels[k]||{}).zh||k}</div>
       <div class="mw num${neg?" neg":""}">${fmt(v.mw)}<small>MW</small></div>
       <div class="pc">${pc}</div>${spark(k)}</div>`;
