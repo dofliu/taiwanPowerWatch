@@ -21,14 +21,25 @@ Web：同網域 fetch ／ Android App(Capacitor)：fetch Pages 絕對網址(Page
 ## 檔案
 
 - `taipower_power_scraper.py` — 抓台電 genary（含**全部**機組），依機組類型分組彙總；
-  同時抓電力供需（備轉容量率，主要來源被 WAF 擋時退每日備援並誠實標示）
-- `docs/index.html` — 行動優先前端（發電結構堆疊條、各能源別卡片＋24h 趨勢、備轉燈號）
+  同時抓電力供需（備轉容量率，主要來源被 WAF 擋時退每日備援並誠實標示）；
+  另彙整**長期每日摘要**（單日平均/最大＋各能源別平均，永久累積，沿用風電風情的存檔模式）
+- `docs/index.html` — 行動優先前端（發電結構堆疊條、各能源別卡片＋24h 趨勢、備轉燈號、
+  **發電趨勢圖**：近 24 時／近 7 天／全部（每日），可切換總發電或任一能源別；
+  App 內另有**供電警戒通知開關**，網頁版自動隱藏）
 - `docs/power_realtime.json` — 即時各能源別彙總＋原始機組類型對照（透明可校準）
 - `docs/power_history.json` — 滾動 7 天歷史
+- `docs/power_daily.json` — 長期每日摘要（趨勢圖「全部」範圍的資料來源，舊日期永久保留）
 - `docs/grid_status.json` — 電力供需
-- `capacitor.config.json` / `package.json` — Capacitor App 設定（webDir 指向 docs/）
+- `docs/runners/alert.js` — 背景警戒通知 runner（Capacitor Background Runner，約每 30 分
+  背景檢查備轉容量率，「惡化進入」警戒（<6%）或限電（<3%）時發本地通知一次，恢復不打擾；
+  每日備援資料會在通知註明「非即時」）。**背景通知需實機驗證**，各廠牌省電策略可能影響觸發頻率
+- `assets/` — App 圖示（1024）與啟動畫面（2732）原始圖，CI 建置時由 `@capacitor/assets`
+  產生全部密度與 adaptive icon
+- `capacitor.config.json` / `package.json` — Capacitor v8 App 設定（webDir 指向 docs/）
 - `.github/workflows/scrape.yml` — 每 15 分鐘資料更新
-- `.github/workflows/android-build.yml` — 手動觸發建置 debug APK（android/ 平台目錄由 CI 即時產生，不進版控）
+- `.github/workflows/android-build.yml` — 手動觸發建置 debug APK（android/ 平台目錄由 CI
+  即時產生，不進版控；Node 22 為 Capacitor CLI 8 需求；background-runner 附帶的
+  AAR 需補 flatDir 解析，workflow 內已處理）
 
 ## 啟用步驟
 
