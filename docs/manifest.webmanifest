@@ -1,0 +1,10 @@
+{
+  "name": "台灣電力情報站 Taiwan Power Watch",
+  "short_name": "電力情報站",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a2a3a",
+  "theme_color": "#0a2a3a",
+  "description": "台灣全能源別即時電力資訊，資料來自政府公開資料 API。",
+  "icons": []
+}

@@ -1,0 +1,6 @@
+{
+  "appId": "cc.doflab.powerwatch",
+  "appName": "台灣電力情報站",
+  "webDir": "docs",
+  "android": { "allowMixedContent": false }
+}

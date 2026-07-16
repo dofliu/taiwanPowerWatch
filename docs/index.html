@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>台灣電力情報站 · Taiwan Power Watch</title>
+<meta name="description" content="台灣全能源別即時電力資訊：燃氣、燃煤、核能、風力、太陽能、水力、儲能等即時發電與備轉容量率，資料來自政府公開資料。">
+<meta name="theme-color" content="#0a2a3a">
+<link rel="manifest" href="./manifest.webmanifest">
+<style>
+  :root{
+    --sea-0:#06212e;--sea-1:#0a2a3a;--sea-2:#0e3547;--sea-3:#13455c;--line:#1d5571;
+    --foam:#e9f5f4;--mist:#9fc3cc;--mist-dim:#6f9aa6;
+    --gen:#34e0ad;--sky:#56c2e8;--amber:#f4a64d;--red:#ef4444;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+    background:var(--sea-1);color:var(--foam);min-height:100vh;
+    padding:max(12px,env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))}
+  .num{font-variant-numeric:tabular-nums}
+  .wrap{max-width:760px;margin:0 auto}
+  header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  h1{font-size:21px;font-weight:900;letter-spacing:.12em;
+    background:linear-gradient(92deg,var(--foam),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:10px;letter-spacing:.25em;color:var(--mist-dim);text-transform:uppercase}
+  .feed{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mist)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--amber)}
+  .dot.live{background:var(--gen);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,224,173,.6)}70%{box-shadow:0 0 0 7px rgba(52,224,173,0)}100%{box-shadow:0 0 0 0 rgba(52,224,173,0)}}
+
+  .hero{background:linear-gradient(120deg,#103d52,#0a2a3a);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .hero .k{font-size:13px;color:var(--mist)}
+  .hero .v{font-size:44px;font-weight:800;color:var(--gen);line-height:1.1}
+  .hero .v small{font-size:16px;color:var(--mist);font-weight:700;margin-left:4px}
+
+  .gridbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--sea-2);
+    border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:12.5px}
+  .gridbar:empty{display:none}
+  .gridbar .gdot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 8px currentColor;flex:0 0 auto}
+  .gridbar b{color:var(--foam)}
+  .gridbar .src{margin-left:auto;color:var(--mist-dim);font-size:10.5px;flex-basis:100%;text-align:right}
+
+  .mix{background:var(--sea-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  .mix h2,.cards h2{font-size:13px;color:var(--mist);font-weight:700;margin-bottom:10px;letter-spacing:.05em}
+  .stackbar{display:flex;height:26px;border-radius:8px;overflow:hidden;background:var(--sea-0)}
+  .stackbar i{display:block;height:100%;border-right:2px solid var(--sea-1)}
+  .legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:5px 14px;margin-top:12px;font-size:12px}
+  .lg{display:flex;align-items:center;gap:7px;color:var(--mist)}
+  .lg i{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+  .lg b{color:var(--foam);margin-left:auto;font-weight:700}
+
+  .cards{margin-bottom:12px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:9px}
+  .card{background:var(--sea-2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;position:relative;overflow:hidden}
+  .card .nm{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--mist);font-weight:700}
+  .card .nm i{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+  .card .mw{font-size:21px;font-weight:800;color:var(--foam);margin-top:5px}
+  .card .mw small{font-size:11px;color:var(--mist-dim);font-weight:600;margin-left:2px}
+  .card .pc{font-size:11px;color:var(--mist-dim);margin-top:2px}
+  .card svg{position:absolute;right:0;bottom:0;left:0;height:26px;opacity:.5}
+  .neg{color:var(--sky)!important}
+
+  footer{font-size:10.5px;color:var(--mist-dim);line-height:1.7;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
+  footer a{color:var(--sky)}
+  .lineage{margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>台灣電力情報站</h1><div class="sub">Taiwan Power Watch</div></div>
+    <div class="feed"><span class="dot" id="feeddot"></span><span id="feedtxt">載入中…</span></div>
+  </header>
+
+  <div class="hero">
+    <div class="k">全國即時發電</div>
+    <div class="v num" id="total">—<small>MW</small></div>
+  </div>
+
+  <div class="gridbar" id="gridbar"></div>
+
+  <div class="mix">
+    <h2>⚡ 即時發電結構</h2>
+    <div class="stackbar" id="stackbar"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="cards">
+    <h2>📊 各能源別即時出力（含 24 小時迷你趨勢）</h2>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+
+  <footer>
+    資料來源：政府資料開放平臺「台灣電力公司各機組發電量即時資訊」（每 10 分鐘更新）、
+    台電電力供需資訊。政府資料開放授權條款－第 1 版。<br>
+    抽蓄與儲能之「負載」（抽水/充電）為負值，照實呈現；各能源別為機組類型彙總，分組對照表公開於
+    <a href="https://github.com/dofliu/taiwanPowerWatch" target="_blank" rel="noopener">GitHub</a>。
+    數據為公開資料整理，僅供參考，非官方正式數字。
+    <div class="lineage">姊妹站：<a href="https://dofliu.github.io/windfarmTaiwan/" target="_blank" rel="noopener">風電風情 · Taiwan Wind Watch</a>（逐風場即時資訊）</div>
+  </footer>
+</div>
+
+<script>
+// 資料端點：網頁版走同網域相對路徑；Capacitor App(非 http/https 網域)走 GitHub Pages 絕對網址(Pages 回應 CORS *)
+const PAGES_BASE="https://dofliu.github.io/taiwanPowerWatch/";
+const IS_APP=!/^https?:$/.test(location.protocol)||!/github\.io$/.test(location.hostname)&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1";
+const BASE=IS_APP?PAGES_BASE:"./";
+
+// 能源別顏色(dataviz 驗證：核心 8 色 CVD ΔE≥16、對比≥3:1 通過；全部圖形皆帶直接文字標籤)
+const COLORS={lng:"#f4a64d",coal:"#b09a82",nuclear:"#a78bfa",cogen:"#8f9f6a",wind:"#34e0ad",
+  solar:"#fbbf24",hydro:"#56c2e8",pumped:"#2f7fb5",oil:"#c97b5a",storage:"#f472b6",other_re:"#86efac",other:"#5b7e8a"};
+const ORDER=["lng","coal","nuclear","cogen","wind","solar","hydro","pumped","oil","storage","other_re","other"];
+let RT=null,HIST=null;
+
+const fmt=n=>Math.round(n).toLocaleString();
+function fmtT(s){if(!s)return"";const d=new Date(s);if(isNaN(d))return s;
+  const p=n=>String(n).padStart(2,"0");return `${p(d.getMonth()+1)}/${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;}
+
+function paint(){
+  if(!RT)return;
+  const g=RT.groups||{},labels=RT.labels||{};
+  document.getElementById("total").innerHTML=`${fmt(RT.system_total_mw)}<small>MW</small>`;
+  document.getElementById("feedtxt").textContent=`即時 · 台電 ${fmtT(RT.source_time)}`;
+  document.getElementById("feeddot").className="dot live";
+  // 發電結構(僅正值列入佔比；負值如抽蓄抽水/儲能充電在卡片區照實顯示)
+  const pos=ORDER.filter(k=>g[k]&&g[k].mw>0);
+  const sumPos=pos.reduce((s,k)=>s+g[k].mw,0)||1;
+  document.getElementById("stackbar").innerHTML=pos.map(k=>
+    `<i style="width:${(g[k].mw/sumPos*100).toFixed(2)}%;background:${COLORS[k]}" title="${(labels[k]||{}).zh||k} ${fmt(g[k].mw)} MW"></i>`).join("");
+  document.getElementById("legend").innerHTML=pos.map(k=>
+    `<div class="lg"><i style="background:${COLORS[k]}"></i>${(labels[k]||{}).zh||k}<b class="num">${(g[k].mw/sumPos*100).toFixed(1)}%</b></div>`).join("");
+  // 卡片
+  const keys=ORDER.filter(k=>g[k]);
+  document.getElementById("cgrid").innerHTML=keys.map(k=>{
+    const v=g[k],neg=v.mw<0;
+    const pc=v.cap_mw>0&&v.mw>0?`容量 ${fmt(v.cap_mw)} MW · 使用 ${(v.mw/v.cap_mw*100).toFixed(0)}%`:(neg?"抽水/充電中（負值＝用電）":`${v.units} 部機組`);
+    return `<div class="card" data-k="${k}"><div class="nm"><i style="background:${COLORS[k]}"></i>${(labels[k]||{}).zh||k}</div>
+      <div class="mw num${neg?" neg":""}">${fmt(v.mw)}<small>MW</small></div>
+      <div class="pc">${pc}</div>${spark(k)}</div>`;
+  }).join("");
+}
+function spark(k){
+  if(!HIST||!HIST.points||HIST.points.length<2)return"";
+  const pts=HIST.points.slice(-96).map(p=>(p.g||{})[k]).filter(v=>typeof v==="number");
+  if(pts.length<2)return"";
+  const mx=Math.max(...pts.map(Math.abs),1),W=100,H=26;
+  const d=pts.map((v,i)=>`${(i/(pts.length-1)*W).toFixed(1)},${(H-((v/mx)+1)/2*H).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline points="${d}" fill="none" stroke="${COLORS[k]}" stroke-width="1.5"/></svg>`;
+}
+function tier(p,txt){
+  if(txt){if(txt.includes("限電"))return["var(--red)",txt];if(txt.includes("警戒"))return["var(--amber)",txt];
+    if(txt.includes("吃緊"))return["var(--amber)",txt];if(txt.includes("充裕"))return["var(--gen)",txt];}
+  if(p>=10)return["var(--gen)","供電充裕"];if(p>=6)return["var(--amber)","供電吃緊"];
+  if(p>=3)return["var(--amber)","供電警戒"];return["var(--red)","限電警戒"];
+}
+function paintGrid(j){
+  const el=document.getElementById("gridbar");
+  if(!j||typeof j.reserve_pct!=="number"){el.innerHTML="";return;}
+  const[c,label]=tier(j.reserve_pct,j.status_text),daily=j.granularity==="daily";
+  el.innerHTML=`<span class="gdot" style="background:${c};color:${c}"></span><b>${label}</b>
+    <span style="color:${c};font-weight:800" class="num">${j.reserve_pct.toFixed(1)}%</span>
+    <span style="color:var(--mist-dim)">備轉容量率</span>
+    <span class="src">${daily?`官方每日資料，非即時，截至 ${j.source_time||""}`:`台電電力供需即時報表${j.source_time?` · ${fmtT(j.source_time)}`:""}`}</span>`;
+}
+async function load(){
+  try{
+    const[r,h,g]=await Promise.all([
+      fetch(BASE+"power_realtime.json",{cache:"no-store"}).then(x=>x.json()),
+      fetch(BASE+"power_history.json",{cache:"no-store"}).then(x=>x.json()).catch(()=>null),
+      fetch(BASE+"grid_status.json",{cache:"no-store"}).then(x=>x.json()).catch(()=>null),
+    ]);
+    RT=r;HIST=h;paint();paintGrid(g);
+  }catch(e){
+    document.getElementById("feedtxt").textContent="資料載入失敗，稍後自動重試";
+    document.getElementById("feeddot").className="dot";
+  }
+}
+load();setInterval(load,600000);
+</script>
+</body>
+</html>
