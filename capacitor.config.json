@@ -2,5 +2,21 @@
   "appId": "cc.doflab.powerwatch",
   "appName": "台灣電力情報站",
   "webDir": "docs",
-  "android": { "allowMixedContent": false }
+  "android": { "allowMixedContent": false },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "launchAutoHide": true,
+      "backgroundColor": "#0a2a3a",
+      "androidScaleType": "CENTER_CROP"
+    },
+    "BackgroundRunner": {
+      "label": "cc.doflab.powerwatch.alert",
+      "src": "runners/alert.js",
+      "event": "checkGrid",
+      "repeat": true,
+      "interval": 30,
+      "autoStart": true
+    }
+  }
 }

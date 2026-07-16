@@ -21,6 +21,8 @@ jobs:
         run: npm install
       - name: Generate Android platform
         run: npx cap add android
+      - name: Generate icons & splash screens
+        run: npx capacitor-assets generate --android --iconBackgroundColor '#0a2a3a' --iconBackgroundColorDark '#06212e' --splashBackgroundColor '#0a2a3a' --splashBackgroundColorDark '#0a2a3a'
       - name: Sync web assets
         run: npx cap sync android
       - name: Build debug APK

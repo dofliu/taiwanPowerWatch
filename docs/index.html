@@ -7,6 +7,8 @@
 <meta name="description" content="台灣全能源別即時電力資訊：燃氣、燃煤、核能、風力、太陽能、水力、儲能等即時發電與備轉容量率，資料來自政府公開資料。">
 <meta name="theme-color" content="#0a2a3a">
 <link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <style>
   :root{
     --sea-0:#06212e;--sea-1:#0a2a3a;--sea-2:#0e3547;--sea-3:#13455c;--line:#1d5571;
@@ -60,6 +62,17 @@
   .card svg{position:absolute;right:0;bottom:0;left:0;height:26px;opacity:.5}
   .neg{color:var(--sky)!important}
 
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .chips button{background:var(--sea-0);border:1px solid var(--line);border-radius:999px;color:var(--mist);
+    font-family:inherit;font-size:12px;font-weight:700;padding:5px 12px;cursor:pointer}
+  .chips button.on{background:linear-gradient(180deg,var(--sea-3),var(--sea-2));color:var(--foam);border-color:var(--gen)}
+  .trendnote{font-size:11px;color:var(--mist-dim);margin-top:8px}
+  .notifrow{display:none;flex-wrap:wrap;align-items:center;gap:10px;background:var(--sea-2);border:1px solid var(--line);
+    border-radius:12px;padding:11px 14px;margin-bottom:12px;font-size:13px}
+  .notifrow .d{color:var(--mist-dim);font-size:11px;flex-basis:100%;line-height:1.6}
+  .notifrow button{margin-left:auto;background:var(--sea-0);border:1px solid var(--line);border-radius:9px;
+    color:var(--foam);font-family:inherit;font-size:13px;font-weight:700;padding:7px 14px;cursor:pointer}
+  .notifrow button.on{border-color:var(--gen);color:var(--gen)}
   footer{font-size:10.5px;color:var(--mist-dim);line-height:1.7;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
   footer a{color:var(--sky)}
   .lineage{margin-top:6px}
@@ -88,6 +101,20 @@
   <div class="cards">
     <h2>📊 各能源別即時出力（含 24 小時迷你趨勢）</h2>
     <div class="cgrid" id="cgrid"></div>
+  </div>
+
+  <div class="mix">
+    <h2>📈 發電趨勢</h2>
+    <div class="chips" id="rangeChips"></div>
+    <div class="chips" id="groupChips"></div>
+    <div id="trendbox"></div>
+    <div class="trendnote" id="trendnote"></div>
+  </div>
+
+  <div class="notifrow" id="notifrow">
+    <span>🔔 供電警戒通知</span><button id="notifbtn">開啟</button>
+    <span class="d">背景約每 30 分鐘檢查一次備轉容量率，「惡化進入」警戒（&lt;6%）或限電（&lt;3%）時通知一次；
+    資料若為官方每日備援（非即時）會在通知中註明。</span>
   </div>
 
   <footer>
@@ -162,14 +189,89 @@ function paintGrid(j){
     <span style="color:var(--mist-dim)">備轉容量率</span>
     <span class="src">${daily?`官方每日資料，非即時，截至 ${j.source_time||""}`:`台電電力供需即時報表${j.source_time?` · ${fmtT(j.source_time)}`:""}`}</span>`;
 }
+// ===== 發電趨勢：24h/7天 讀滾動歷史(每 15 分一筆)，全部 讀每日摘要(永久累積) =====
+let DAILY=null,trendRange="24h",trendKey="total";
+const RANGES=[["24h","近 24 時"],["7d","近 7 天"],["all","全部（每日）"]];
+function trendSeries(){
+  if(trendRange==="all"){
+    const ds=(DAILY&&DAILY.days)||[];
+    return ds.map(r=>({t:r.d,v:trendKey==="total"?r.avg:((r.g||{})[trendKey]),max:trendKey==="total"?r.max:null}))
+      .filter(p=>typeof p.v==="number");
+  }
+  const pts=(HIST&&HIST.points)||[];
+  if(!pts.length)return[];
+  const hrs=trendRange==="24h"?24:168;
+  const cut=new Date(pts[pts.length-1].t).getTime()-hrs*3600000;
+  return pts.filter(p=>new Date(p.t).getTime()>=cut)
+    .map(p=>({t:p.t,v:trendKey==="total"?p.total:((p.g||{})[trendKey])}))
+    .filter(p=>typeof p.v==="number");
+}
+function paintTrend(){
+  const labels=(RT&&RT.labels)||{};
+  document.getElementById("rangeChips").innerHTML=RANGES.map(([k,l])=>
+    `<button data-r="${k}" class="${trendRange===k?"on":""}">${l}</button>`).join("");
+  const gkeys=["total",...ORDER.filter(k=>RT&&RT.groups&&RT.groups[k])];
+  document.getElementById("groupChips").innerHTML=gkeys.map(k=>
+    `<button data-g="${k}" class="${trendKey===k?"on":""}">${k==="total"?"總發電":((labels[k]||{}).zh||k)}</button>`).join("");
+  const s=trendSeries(),box=document.getElementById("trendbox"),note=document.getElementById("trendnote");
+  if(s.length<2){box.innerHTML=`<div style="color:var(--mist-dim);font-size:12px;padding:12px 0">趨勢資料累積中（目前 ${s.length} 筆）</div>`;note.textContent="";return;}
+  const col=trendKey==="total"?"#34e0ad":COLORS[trendKey];
+  const W=700,H=200,pl=52,pr=10,pt=12,pb=24;
+  const vals=s.map(p=>p.v),lo=Math.min(0,...vals),hi=Math.max(...vals,1);
+  const X=i=>pl+i/(s.length-1)*(W-pl-pr),Y=v=>pt+(1-(v-lo)/(hi-lo||1))*(H-pt-pb);
+  let grid="";for(let j=0;j<=4;j++){const gv=lo+(hi-lo)*j/4,yy=Y(gv);
+    grid+=`<line x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}" stroke="#1d5571" opacity=".5"/><text x="${pl-6}" y="${yy+4}" fill="#6f9aa6" font-size="10" text-anchor="end">${Math.round(gv).toLocaleString()}</text>`;}
+  let xl="",lastD="";s.forEach((p,i)=>{const d=String(p.t).slice(trendRange==="all"?5:5,10);
+    if(trendRange!=="24h"&&d!==lastD&&i%Math.ceil(s.length/6)===0){lastD=d;xl+=`<text x="${X(i)}" y="${H-6}" fill="#6f9aa6" font-size="10" text-anchor="middle">${d}</text>`;}
+    else if(trendRange==="24h"&&i%Math.ceil(s.length/6)===0){xl+=`<text x="${X(i)}" y="${H-6}" fill="#6f9aa6" font-size="10" text-anchor="middle">${String(p.t).slice(11,16)}</text>`;}});
+  const line=s.map((p,i)=>`${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join(" ");
+  const hw=(W-pl-pr)/(s.length-1);
+  const hover=s.map((p,i)=>`<rect x="${(X(i)-hw/2).toFixed(1)}" y="${pt}" width="${hw.toFixed(1)}" height="${H-pt-pb}" fill="transparent"><title>${p.t}
+${Math.round(p.v).toLocaleString()} MW${p.max?` · 當日最大 ${Math.round(p.max).toLocaleString()} MW`:""}</title></rect>`).join("");
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${grid}${xl}
+    <polyline points="${line}" fill="none" stroke="${col}" stroke-width="2"/>${hover}</svg>`;
+  note.textContent=trendRange==="all"
+    ?`${s[0].t} ～ ${s[s.length-1].t} · 每點＝單日平均 MW（自本站啟用起永久累積）`
+    :`${String(s[0].t).slice(0,16).replace("T"," ")} ～ ${String(s[s.length-1].t).slice(0,16).replace("T"," ")} · 每 15 分鐘一筆`;
+}
+document.getElementById("rangeChips").onclick=e=>{const b=e.target.closest("button");if(b){trendRange=b.dataset.r;paintTrend();}};
+document.getElementById("groupChips").onclick=e=>{const b=e.target.closest("button");if(b){trendKey=b.dataset.g;paintTrend();}};
+
+// ===== 供電警戒通知(僅原生 App 顯示；Capacitor Background Runner + Local Notifications) =====
+const CAP=window.Capacitor;
+async function setupNotif(){
+  if(!(CAP&&CAP.isNativePlatform&&CAP.isNativePlatform()))return;
+  const row=document.getElementById("notifrow"),btn=document.getElementById("notifbtn");
+  row.style.display="flex";
+  const sync=()=>{const on=localStorage.getItem("alerts")==="1";
+    btn.textContent=on?"已開啟 ✓":"開啟";btn.classList.toggle("on",on);};
+  sync();
+  btn.onclick=async()=>{
+    const turnOn=localStorage.getItem("alerts")!=="1";
+    try{
+      const P=CAP.Plugins;
+      if(turnOn){
+        if(P.LocalNotifications)await P.LocalNotifications.requestPermissions();
+        if(P.BackgroundRunner&&P.BackgroundRunner.requestPermissions)
+          await P.BackgroundRunner.requestPermissions({apis:["notifications"]});
+      }
+      if(P.BackgroundRunner)await P.BackgroundRunner.dispatchEvent({
+        label:"cc.doflab.powerwatch.alert",event:"setEnabled",details:{enabled:turnOn}});
+      localStorage.setItem("alerts",turnOn?"1":"0");sync();
+    }catch(e){alert("設定通知失敗："+(e&&e.message||e));}
+  };
+}
+setupNotif();
+
 async function load(){
   try{
-    const[r,h,g]=await Promise.all([
+    const[r,h,g,d]=await Promise.all([
       fetch(BASE+"power_realtime.json",{cache:"no-store"}).then(x=>x.json()),
       fetch(BASE+"power_history.json",{cache:"no-store"}).then(x=>x.json()).catch(()=>null),
       fetch(BASE+"grid_status.json",{cache:"no-store"}).then(x=>x.json()).catch(()=>null),
+      fetch(BASE+"power_daily.json",{cache:"no-store"}).then(x=>x.json()).catch(()=>null),
     ]);
-    RT=r;HIST=h;paint();paintGrid(g);
+    RT=r;HIST=h;DAILY=d;paint();paintGrid(g);paintTrend();
   }catch(e){
     document.getElementById("feedtxt").textContent="資料載入失敗，稍後自動重試";
     document.getElementById("feeddot").className="dot";

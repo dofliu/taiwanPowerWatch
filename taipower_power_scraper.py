@@ -40,6 +40,7 @@ DOCS = Path(__file__).with_name("docs")
 OUTPUT = DOCS / "power_realtime.json"
 HISTORY = DOCS / "power_history.json"
 GRID_OUTPUT = DOCS / "grid_status.json"
+DAILY = DOCS / "power_daily.json"   # 長期每日摘要(永久累積，供前端「全部」趨勢)
 HISTORY_DAYS = 7
 MAX_POINTS = 1200
 
@@ -192,6 +193,45 @@ def update_history(groups, total, t, updated):
         {"updated": updated, "points": points}, ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8")
     return len(points)
+
+
+def update_daily(now_iso):
+    """長期每日摘要：由滾動歷史彙整「當前仍在 7 天窗內」的各日期(總發電 平均/最大、
+    各能源別平均)，合併進既有摘要——舊日期永久保留，檔案隨時間成長(每日一列，很小)。
+    沿用 windfarmTaiwan 的每日摘要存檔模式。"""
+    try:
+        points = json.loads(HISTORY.read_text(encoding="utf-8")).get("points", [])
+    except Exception:
+        return 0
+    bydate = {}
+    for pt in points:
+        d = (pt.get("t") or "")[:10]
+        if len(d) == 10:
+            bydate.setdefault(d, []).append(pt)
+    days = {}
+    if DAILY.exists():
+        try:
+            for r in json.loads(DAILY.read_text(encoding="utf-8")).get("days", []):
+                if r.get("d"):
+                    days[r["d"]] = r
+        except Exception:
+            pass
+    for d, pts in bydate.items():
+        tot = [pt.get("total") for pt in pts if isinstance(pt.get("total"), (int, float))]
+        if not tot:
+            continue
+        gs = {}
+        for pt in pts:
+            for k, v in (pt.get("g") or {}).items():
+                if isinstance(v, (int, float)):
+                    gs.setdefault(k, []).append(v)
+        days[d] = {"d": d, "avg": round(sum(tot) / len(tot), 1), "max": round(max(tot), 1),
+                   "n": len(tot),
+                   "g": {k: round(sum(v) / len(v), 1) for k, v in sorted(gs.items())}}
+    rows = [days[d] for d in sorted(days)]
+    DAILY.write_text(json.dumps({"updated": now_iso, "days": rows},
+                                 ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    return len(rows)
 
 
 # ===== 電力供需(備轉容量率)：整段沿用 windfarmTaiwan 已實測的作法 =====
@@ -354,8 +394,9 @@ def main():
         "raw_types": raw_types,
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     n = update_history(groups, total, upd or now, now)
+    nd = update_daily(now)
     print(f"[OK] {now} 全系統 {total} MW，{len(groups)} 個能源別，"
-          f"{len(raw_types)} 種原始類型 · 歷史 {n} 筆")
+          f"{len(raw_types)} 種原始類型 · 歷史 {n} 筆 · 每日摘要 {nd} 天")
 
 
 if __name__ == "__main__":
