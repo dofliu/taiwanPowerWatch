@@ -1,0 +1,164 @@
+{
+ "updated": "2026-07-16T18:26:01+08:00",
+ "source_time": "2026-07-16T18:20:00",
+ "system_total_mw": 37089.7,
+ "groups": {
+  "lng": {
+   "mw": 20248.3,
+   "cap_mw": 22308.0,
+   "units": 41
+  },
+  "coal": {
+   "mw": 9562.4,
+   "cap_mw": 12558.6,
+   "units": 23
+  },
+  "cogen": {
+   "mw": 2025.2,
+   "cap_mw": 631.4,
+   "units": 1
+  },
+  "other": {
+   "mw": 349.2,
+   "cap_mw": 1551.7,
+   "units": 11
+  },
+  "solar": {
+   "mw": 645.6,
+   "cap_mw": 15145.4,
+   "units": 21
+  },
+  "wind": {
+   "mw": 2337.7,
+   "cap_mw": 3850.0,
+   "units": 30
+  },
+  "hydro": {
+   "mw": 998.8,
+   "cap_mw": 2109.6,
+   "units": 51
+  },
+  "storage": {
+   "mw": 886.3,
+   "cap_mw": 3444.3,
+   "units": 22
+  },
+  "other_re": {
+   "mw": 36.2,
+   "cap_mw": 68.0,
+   "units": 3
+  }
+ },
+ "labels": {
+  "lng": {
+   "zh": "燃氣",
+   "en": "LNG"
+  },
+  "coal": {
+   "zh": "燃煤",
+   "en": "Coal"
+  },
+  "nuclear": {
+   "zh": "核能",
+   "en": "Nuclear"
+  },
+  "cogen": {
+   "zh": "汽電共生",
+   "en": "Co-gen"
+  },
+  "wind": {
+   "zh": "風力",
+   "en": "Wind"
+  },
+  "solar": {
+   "zh": "太陽能",
+   "en": "Solar"
+  },
+  "hydro": {
+   "zh": "水力",
+   "en": "Hydro"
+  },
+  "pumped": {
+   "zh": "抽蓄",
+   "en": "Pumped"
+  },
+  "oil": {
+   "zh": "燃油",
+   "en": "Oil"
+  },
+  "storage": {
+   "zh": "儲能",
+   "en": "Storage"
+  },
+  "other_re": {
+   "zh": "其他再生",
+   "en": "Other RE"
+  },
+  "other": {
+   "zh": "其他",
+   "en": "Other"
+  }
+ },
+ "raw_types": {
+  "燃氣": {
+   "mw": 14019.8,
+   "group": "lng",
+   "units": 30
+  },
+  "民營電廠-燃氣": {
+   "mw": 6228.5,
+   "group": "lng",
+   "units": 11
+  },
+  "燃煤": {
+   "mw": 7425.2,
+   "group": "coal",
+   "units": 19
+  },
+  "民營電廠-燃煤": {
+   "mw": 2137.2,
+   "group": "coal",
+   "units": 4
+  },
+  "汽電共生": {
+   "mw": 2025.2,
+   "group": "cogen",
+   "units": 1
+  },
+  "燃料油": {
+   "mw": 349.2,
+   "group": "other",
+   "units": 11
+  },
+  "太陽能": {
+   "mw": 645.6,
+   "group": "solar",
+   "units": 21
+  },
+  "風力": {
+   "mw": 2337.7,
+   "group": "wind",
+   "units": 30
+  },
+  "水力": {
+   "mw": 998.8,
+   "group": "hydro",
+   "units": 51
+  },
+  "儲能": {
+   "mw": 886.3,
+   "group": "storage",
+   "units": 11
+  },
+  "其它再生能源": {
+   "mw": 36.2,
+   "group": "other_re",
+   "units": 3
+  },
+  "儲能負載(Energy Storage System Load)": {
+   "mw": 0.0,
+   "group": "storage",
+   "units": 11
+  }
+ }
+}
