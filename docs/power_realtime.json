@@ -1,25 +1,25 @@
 {
- "updated": "2026-07-19T02:33:00+08:00",
- "source_time": "2026-07-19T02:20:00",
- "system_total_mw": 27908.4,
+ "updated": "2026-07-19T03:49:12+08:00",
+ "source_time": "2026-07-19T03:40:00",
+ "system_total_mw": 27183.6,
  "groups": {
   "lng": {
-   "mw": 15332.4,
+   "mw": 15082.1,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 8141.4,
+   "mw": 8127.0,
    "cap_mw": 12558.6,
    "units": 23
   },
   "cogen": {
-   "mw": 884.8,
+   "mw": 882.8,
    "cap_mw": 631.4,
    "units": 1
   },
   "oil": {
-   "mw": 337.9,
+   "mw": 337.1,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 2041.2,
+   "mw": 1789.3,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 821.0,
+   "mw": 812.8,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 316.8,
+   "mw": 118.7,
    "cap_mw": 3445.5,
    "units": 22
   },
   "other_re": {
-   "mw": 32.9,
+   "mw": 33.8,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 12728.9,
+   "mw": 12540.7,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 2603.5,
+   "mw": 2541.4,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 6061.6,
+   "mw": 6040.4,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 2079.8,
+   "mw": 2086.6,
    "group": "coal",
    "units": 4
   },
   "汽電共生": {
-   "mw": 884.8,
+   "mw": 882.8,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 337.9,
+   "mw": 337.1,
    "group": "oil",
    "units": 11
   },
@@ -136,27 +136,27 @@
    "units": 21
   },
   "風力": {
-   "mw": 2041.2,
+   "mw": 1789.3,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 821.0,
+   "mw": 812.8,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 316.8,
+   "mw": 137.6,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 32.9,
+   "mw": 33.8,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": 0.0,
+   "mw": -18.9,
    "group": "storage",
    "units": 11
   }
