@@ -41,6 +41,9 @@
   .gridbar .gdot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 8px currentColor;flex:0 0 auto}
   .gridbar b{color:var(--foam)}
   .gridbar .src{margin-left:auto;color:var(--mist-dim);font-size:10.5px;flex-basis:100%;text-align:right}
+  .gridbar .estline{flex-basis:100%;color:var(--mist-dim);font-size:11px;line-height:1.5;
+    padding-top:8px;margin-top:2px;border-top:1px solid var(--line)}
+  .gridbar .estline b{color:var(--sky);font-weight:800}
 
   .mix{background:var(--sea-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
   .mix h2,.cards h2{font-size:13px;color:var(--mist);font-weight:700;margin-bottom:10px;letter-spacing:.05em}
@@ -180,14 +183,32 @@ function tier(p,txt){
   if(p>=10)return["var(--gen)","供電充裕"];if(p>=6)return["var(--amber)","供電吃緊"];
   if(p>=3)return["var(--amber)","供電警戒"];return["var(--red)","限電警戒"];
 }
+// 「本站估算」餘裕：只用可調度機組類型(排除太陽能/風力等看天吃飯的類型)——
+// 純用總裝置容量減目前發電量會嚴重高估(晚上太陽能掛零時看起來「餘裕變多」，
+// 剛好跟事實相反)，因此排除天氣依賴的類型；但仍未計入歲修/故障機組的不可用容量，
+// 也是拿「目前用電量」而非官方定義的「尖峰負載」，只能算粗略估算，不是官方數字。
+// 僅供顯示參考，不用於供電警戒通知的判斷(那邊仍只採信官方 grid_status)。
+const DISPATCHABLE_GROUPS=["lng","coal","nuclear","cogen","oil","hydro","pumped","storage"];
+function estReserve(){
+  if(!RT||!RT.groups||typeof RT.system_total_mw!=="number"||RT.system_total_mw<=0)return null;
+  let cap=0,out=0;
+  for(const k of DISPATCHABLE_GROUPS){const g=RT.groups[k];if(!g)continue;cap+=g.cap_mw||0;out+=g.mw||0;}
+  if(cap<=0)return null;
+  const headroom=cap-out;
+  return{headroom_mw:Math.round(headroom*10)/10,pct:Math.round(headroom/RT.system_total_mw*1000)/10};
+}
 function paintGrid(j){
   const el=document.getElementById("gridbar");
-  if(!j||typeof j.reserve_pct!=="number"){el.innerHTML="";return;}
+  const est=estReserve();
+  const estHtml=est?`<div class="estline">本站估算可調度餘裕：<b>${est.headroom_mw.toLocaleString()} MW</b>（約 ${est.pct.toFixed(1)}%，以目前用電量計）
+    · 僅計燃氣/燃煤/核能/汽電共生/燃油/水力/抽蓄/儲能，排除看天吃飯的太陽能與風力；
+    未反映歲修／故障機組，也非官方「尖峰負載」定義，非官方數字、僅供參考</div>`:"";
+  if(!j||typeof j.reserve_pct!=="number"){el.innerHTML=estHtml;return;}
   const[c,label]=tier(j.reserve_pct,j.status_text),daily=j.granularity==="daily";
   el.innerHTML=`<span class="gdot" style="background:${c};color:${c}"></span><b>${label}</b>
     <span style="color:${c};font-weight:800" class="num">${j.reserve_pct.toFixed(1)}%</span>
     <span style="color:var(--mist-dim)">備轉容量率</span>
-    <span class="src">${daily?`官方每日資料，非即時，截至 ${j.source_time||""}`:`台電電力供需即時報表${j.source_time?` · ${fmtT(j.source_time)}`:""}`}</span>`;
+    <span class="src">${daily?`官方每日資料，非即時，截至 ${j.source_time||""}`:`台電電力供需即時報表${j.source_time?` · ${fmtT(j.source_time)}`:""}`}</span>${estHtml}`;
 }
 // ===== 發電趨勢：24h/7天 讀滾動歷史(每 15 分一筆)，全部 讀每日摘要(永久累積) =====
 let DAILY=null,trendRange="24h",trendKey="total";
