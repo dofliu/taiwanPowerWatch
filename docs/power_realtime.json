@@ -1,50 +1,50 @@
 {
- "updated": "2026-07-28T11:42:25+08:00",
- "source_time": "2026-07-28T11:30:00",
- "system_total_mw": 38905.8,
+ "updated": "2026-07-28T14:15:45+08:00",
+ "source_time": "2026-07-28T14:10:00",
+ "system_total_mw": 39932.0,
  "groups": {
   "lng": {
-   "mw": 18246.8,
+   "mw": 19927.1,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 7992.1,
+   "mw": 9075.4,
    "cap_mw": 12558.6,
    "units": 23
   },
   "cogen": {
-   "mw": 2076.2,
+   "mw": 1940.6,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 339.4,
+   "mw": 338.3,
    "cap_mw": 1551.7,
    "units": 11
   },
   "solar": {
-   "mw": 8712.5,
+   "mw": 7110.9,
    "cap_mw": 15235.4,
    "units": 21
   },
   "wind": {
-   "mw": 528.9,
+   "mw": 348.0,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 587.4,
+   "mw": 618.9,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 391.5,
+   "mw": 540.1,
    "cap_mw": 3444.0,
    "units": 22
   },
   "other_re": {
-   "mw": 31.0,
+   "mw": 32.7,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,62 +101,62 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 14833.4,
+   "mw": 15690.3,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 3413.4,
+   "mw": 4236.8,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 5893.2,
+   "mw": 6918.2,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 2098.9,
+   "mw": 2157.2,
    "group": "coal",
    "units": 4
   },
   "汽電共生": {
-   "mw": 2076.2,
+   "mw": 1940.6,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 339.4,
+   "mw": 338.3,
    "group": "oil",
    "units": 11
   },
   "太陽能": {
-   "mw": 8712.5,
+   "mw": 7110.9,
    "group": "solar",
    "units": 21
   },
   "風力": {
-   "mw": 528.9,
+   "mw": 348.0,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 587.4,
+   "mw": 618.9,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 391.5,
+   "mw": 555.5,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 31.0,
+   "mw": 32.7,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": 0.0,
+   "mw": -15.4,
    "group": "storage",
    "units": 11
   }
