@@ -1,25 +1,25 @@
 {
- "updated": "2026-08-02T23:16:11+08:00",
- "source_time": "2026-08-02T23:10:00",
- "system_total_mw": 32288.0,
+ "updated": "2026-08-03T00:26:27+08:00",
+ "source_time": "2026-08-03T00:20:00",
+ "system_total_mw": 30700.3,
  "groups": {
   "lng": {
-   "mw": 21056.6,
+   "mw": 20756.0,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 8973.6,
+   "mw": 8657.0,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 873.3,
+   "mw": 816.1,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 354.1,
+   "mw": 346.0,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 30.0,
+   "mw": 29.6,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 463.1,
+   "mw": 367.0,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 513.2,
+   "mw": -294.1,
    "cap_mw": 3450.5,
    "units": 22
   },
   "other_re": {
-   "mw": 24.1,
+   "mw": 22.7,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 16597.7,
+   "mw": 16463.8,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 4458.9,
+   "mw": 4292.2,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 7807.2,
+   "mw": 7478.4,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 1166.4,
+   "mw": 1178.6,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 873.3,
+   "mw": 816.1,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 354.1,
+   "mw": 346.0,
    "group": "oil",
    "units": 11
   },
@@ -136,27 +136,27 @@
    "units": 21
   },
   "風力": {
-   "mw": 30.0,
+   "mw": 29.6,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 463.1,
+   "mw": 367.0,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 513.2,
+   "mw": 0.0,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 24.1,
+   "mw": 22.7,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": 0.0,
+   "mw": -294.1,
    "group": "storage",
    "units": 11
   }
