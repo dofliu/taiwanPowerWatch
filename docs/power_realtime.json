@@ -1,25 +1,25 @@
 {
- "updated": "2026-08-08T02:07:04+08:00",
- "source_time": "2026-08-08T02:00:00",
- "system_total_mw": 30727.6,
+ "updated": "2026-08-08T03:25:00+08:00",
+ "source_time": "2026-08-08T03:10:00",
+ "system_total_mw": 29512.4,
  "groups": {
   "lng": {
-   "mw": 18928.5,
+   "mw": 18583.4,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 9267.5,
+   "mw": 9230.9,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 752.8,
+   "mw": 635.4,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 337.8,
+   "mw": 335.7,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 345.9,
+   "mw": 304.5,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 764.3,
+   "mw": 694.8,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 292.5,
+   "mw": -308.6,
    "cap_mw": 3450.5,
    "units": 22
   },
   "other_re": {
-   "mw": 38.3,
+   "mw": 36.3,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 15115.0,
+   "mw": 15195.7,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 3813.5,
+   "mw": 3387.7,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 8358.5,
+   "mw": 8286.5,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 909.0,
+   "mw": 944.4,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 752.8,
+   "mw": 635.4,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 337.8,
+   "mw": 335.7,
    "group": "oil",
    "units": 11
   },
@@ -136,27 +136,27 @@
    "units": 21
   },
   "風力": {
-   "mw": 345.9,
+   "mw": 304.5,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 764.3,
+   "mw": 694.8,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 298.4,
+   "mw": 0.0,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 38.3,
+   "mw": 36.3,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -5.9,
+   "mw": -308.6,
    "group": "storage",
    "units": 11
   }
