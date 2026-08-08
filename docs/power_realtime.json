@@ -1,50 +1,50 @@
 {
- "updated": "2026-08-08T16:57:25+08:00",
- "source_time": "2026-08-08T16:50:00",
- "system_total_mw": 34416.8,
+ "updated": "2026-08-08T17:49:49+08:00",
+ "source_time": "2026-08-08T17:40:00",
+ "system_total_mw": 33929.5,
  "groups": {
   "lng": {
-   "mw": 20108.4,
+   "mw": 20530.2,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 9132.6,
+   "mw": 8922.6,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 696.4,
+   "mw": 659.3,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 344.6,
+   "mw": 346.3,
    "cap_mw": 1551.7,
    "units": 11
   },
   "solar": {
-   "mw": 3047.1,
+   "mw": 1329.6,
    "cap_mw": 15235.4,
    "units": 21
   },
   "wind": {
-   "mw": 346.7,
+   "mw": 900.4,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 690.4,
+   "mw": 707.5,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 14.5,
+   "mw": 500.1,
    "cap_mw": 3450.5,
    "units": 22
   },
   "other_re": {
-   "mw": 36.1,
+   "mw": 33.5,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,57 +101,57 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 15108.3,
+   "mw": 15696.3,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 5000.1,
+   "mw": 4833.9,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 8275.6,
+   "mw": 7987.9,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 857.0,
+   "mw": 934.7,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 696.4,
+   "mw": 659.3,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 344.6,
+   "mw": 346.3,
    "group": "oil",
    "units": 11
   },
   "太陽能": {
-   "mw": 3047.1,
+   "mw": 1329.6,
    "group": "solar",
    "units": 21
   },
   "風力": {
-   "mw": 346.7,
+   "mw": 900.4,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 690.4,
+   "mw": 707.5,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 14.5,
+   "mw": 500.1,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 36.1,
+   "mw": 33.5,
    "group": "other_re",
    "units": 3
   },
