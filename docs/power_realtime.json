@@ -1,25 +1,25 @@
 {
- "updated": "2026-08-10T02:18:16+08:00",
- "source_time": "2026-08-10T02:10:00",
- "system_total_mw": 26836.4,
+ "updated": "2026-08-10T03:09:12+08:00",
+ "source_time": "2026-08-10T03:00:00",
+ "system_total_mw": 26457.2,
  "groups": {
   "lng": {
-   "mw": 15619.3,
+   "mw": 15721.3,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 7076.5,
+   "mw": 7082.0,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 675.9,
+   "mw": 675.4,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 335.7,
+   "mw": 336.2,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 3000.1,
+   "mw": 2558.5,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 783.8,
+   "mw": 741.7,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": -695.1,
+   "mw": -699.8,
    "cap_mw": 3449.7,
    "units": 22
   },
   "other_re": {
-   "mw": 40.2,
+   "mw": 41.9,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 13889.3,
+   "mw": 13991.2,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 1730.0,
+   "mw": 1730.1,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 5884.1,
+   "mw": 5889.2,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 1192.4,
+   "mw": 1192.8,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 675.9,
+   "mw": 675.4,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 335.7,
+   "mw": 336.2,
    "group": "oil",
    "units": 11
   },
@@ -136,12 +136,12 @@
    "units": 21
   },
   "風力": {
-   "mw": 3000.1,
+   "mw": 2558.5,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 783.8,
+   "mw": 741.7,
    "group": "hydro",
    "units": 51
   },
@@ -151,12 +151,12 @@
    "units": 11
   },
   "其它再生能源": {
-   "mw": 40.2,
+   "mw": 41.9,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -695.1,
+   "mw": -699.8,
    "group": "storage",
    "units": 11
   }
