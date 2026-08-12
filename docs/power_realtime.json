@@ -1,45 +1,45 @@
 {
- "updated": "2026-08-12T12:29:41+08:00",
- "source_time": "2026-08-12T12:20:00",
- "system_total_mw": 38910.9,
+ "updated": "2026-08-12T14:02:50+08:00",
+ "source_time": "2026-08-12T13:50:00",
+ "system_total_mw": 40561.5,
  "groups": {
   "lng": {
-   "mw": 19852.3,
+   "mw": 21105.7,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 8353.2,
+   "mw": 8876.5,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 2170.7,
+   "mw": 2136.1,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 344.2,
+   "mw": 341.6,
    "cap_mw": 1551.7,
    "units": 11
   },
   "solar": {
-   "mw": 6720.9,
+   "mw": 6986.6,
    "cap_mw": 15235.4,
    "units": 21
   },
   "wind": {
-   "mw": 1697.2,
+   "mw": 904.2,
    "cap_mw": 3850.0,
    "units": 30
   },
   "hydro": {
-   "mw": 803.5,
+   "mw": 663.5,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": -1069.0,
+   "mw": -490.6,
    "cap_mw": 3450.5,
    "units": 22
   },
@@ -101,47 +101,47 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 15215.8,
+   "mw": 15237.9,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 4636.5,
+   "mw": 5867.8,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 7210.3,
+   "mw": 7687.1,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 1142.9,
+   "mw": 1189.4,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 2170.7,
+   "mw": 2136.1,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 344.2,
+   "mw": 341.6,
    "group": "oil",
    "units": 11
   },
   "太陽能": {
-   "mw": 6720.9,
+   "mw": 6986.6,
    "group": "solar",
    "units": 21
   },
   "風力": {
-   "mw": 1697.2,
+   "mw": 904.2,
    "group": "wind",
    "units": 30
   },
   "水力": {
-   "mw": 803.5,
+   "mw": 663.5,
    "group": "hydro",
    "units": 51
   },
@@ -156,7 +156,7 @@
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -1069.0,
+   "mw": -490.6,
    "group": "storage",
    "units": 11
   }
