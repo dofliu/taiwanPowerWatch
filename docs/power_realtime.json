@@ -1,25 +1,25 @@
 {
- "updated": "2026-09-19T22:20:44+08:00",
- "source_time": "2026-09-19T22:10:00",
- "system_total_mw": 31117.0,
+ "updated": "2026-09-20T01:24:52+08:00",
+ "source_time": "2026-09-20T01:10:00",
+ "system_total_mw": 27993.7,
  "groups": {
   "lng": {
-   "mw": 21374.7,
+   "mw": 18897.7,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 5249.9,
+   "mw": 5266.8,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 672.7,
+   "mw": 710.8,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 194.1,
+   "mw": 184.7,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,18 +29,18 @@
    "units": 21
   },
   "wind": {
-   "mw": 2253.1,
+   "mw": 2220.9,
    "cap_mw": 4187.1,
    "units": 31
   },
   "hydro": {
-   "mw": 585.2,
+   "mw": 455.3,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 770.7,
-   "cap_mw": 3454.2,
+   "mw": 240.9,
+   "cap_mw": 3455.4,
    "units": 22
   },
   "other_re": {
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 16557.4,
+   "mw": 15580.9,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 4817.3,
+   "mw": 3316.8,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 4865.8,
+   "mw": 4880.5,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 384.1,
+   "mw": 386.3,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 672.7,
+   "mw": 710.8,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 194.1,
+   "mw": 184.7,
    "group": "oil",
    "units": 11
   },
@@ -136,17 +136,17 @@
    "units": 21
   },
   "風力": {
-   "mw": 2253.1,
+   "mw": 2220.9,
    "group": "wind",
    "units": 31
   },
   "水力": {
-   "mw": 585.2,
+   "mw": 455.3,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 792.7,
+   "mw": 283.2,
    "group": "storage",
    "units": 11
   },
@@ -156,7 +156,7 @@
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -22.0,
+   "mw": -42.3,
    "group": "storage",
    "units": 11
   }
