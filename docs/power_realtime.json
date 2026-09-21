@@ -1,25 +1,25 @@
 {
- "updated": "2026-09-21T22:20:08+08:00",
- "source_time": "2026-09-21T22:10:00",
- "system_total_mw": 31640.4,
+ "updated": "2026-09-22T03:38:02+08:00",
+ "source_time": "2026-09-22T03:30:00",
+ "system_total_mw": 26443.2,
  "groups": {
   "lng": {
-   "mw": 19267.5,
+   "mw": 17847.7,
    "cap_mw": 22308.0,
    "units": 41
   },
   "coal": {
-   "mw": 5635.1,
+   "mw": 4971.8,
    "cap_mw": 11358.6,
    "units": 21
   },
   "cogen": {
-   "mw": 1845.0,
+   "mw": 838.9,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 195.5,
+   "mw": 182.4,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 2986.0,
+   "mw": 2438.6,
    "cap_mw": 4187.1,
    "units": 31
   },
   "hydro": {
-   "mw": 792.0,
+   "mw": 656.7,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 910.7,
+   "mw": -501.1,
    "cap_mw": 3455.4,
    "units": 22
   },
   "other_re": {
-   "mw": 8.6,
+   "mw": 8.2,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,32 +101,32 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 15211.0,
+   "mw": 15088.2,
    "group": "lng",
    "units": 30
   },
   "民營電廠-燃氣": {
-   "mw": 4056.5,
+   "mw": 2759.5,
    "group": "lng",
    "units": 11
   },
   "燃煤": {
-   "mw": 4859.0,
+   "mw": 4202.5,
    "group": "coal",
    "units": 19
   },
   "民營電廠-燃煤": {
-   "mw": 776.1,
+   "mw": 769.3,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 1845.0,
+   "mw": 838.9,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 195.5,
+   "mw": 182.4,
    "group": "oil",
    "units": 11
   },
@@ -136,27 +136,27 @@
    "units": 21
   },
   "風力": {
-   "mw": 2986.0,
+   "mw": 2438.6,
    "group": "wind",
    "units": 31
   },
   "水力": {
-   "mw": 792.0,
+   "mw": 656.7,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 924.2,
+   "mw": 0.0,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 8.6,
+   "mw": 8.2,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -13.5,
+   "mw": -501.1,
    "group": "storage",
    "units": 11
   }
