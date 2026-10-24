@@ -1,25 +1,25 @@
 {
- "updated": "2026-10-25T00:44:30+08:00",
- "source_time": "2026-10-25T00:30:00",
- "system_total_mw": 25374.0,
+ "updated": "2026-10-25T03:04:59+08:00",
+ "source_time": "2026-10-25T02:50:00",
+ "system_total_mw": 23945.1,
  "groups": {
   "lng": {
-   "mw": 13949.0,
+   "mw": 13998.5,
    "cap_mw": 23606.2,
    "units": 41
   },
   "coal": {
-   "mw": 8607.5,
+   "mw": 7858.5,
    "cap_mw": 10258.6,
    "units": 19
   },
   "cogen": {
-   "mw": 551.4,
+   "mw": 565.4,
    "cap_mw": 627.3,
    "units": 1
   },
   "oil": {
-   "mw": 45.1,
+   "mw": 43.8,
    "cap_mw": 1551.7,
    "units": 11
   },
@@ -29,22 +29,22 @@
    "units": 21
   },
   "wind": {
-   "mw": 984.1,
+   "mw": 536.5,
    "cap_mw": 4187.1,
    "units": 31
   },
   "hydro": {
-   "mw": 488.0,
+   "mw": 535.7,
    "cap_mw": 2109.6,
    "units": 51
   },
   "storage": {
-   "mw": 721.5,
+   "mw": 374.9,
    "cap_mw": 3460.4,
    "units": 22
   },
   "other_re": {
-   "mw": 27.4,
+   "mw": 31.8,
    "cap_mw": 68.0,
    "units": 3
   }
@@ -101,7 +101,7 @@
  },
  "raw_types": {
   "燃氣": {
-   "mw": 13454.6,
+   "mw": 13504.1,
    "group": "lng",
    "units": 30
   },
@@ -111,22 +111,22 @@
    "units": 11
   },
   "燃煤": {
-   "mw": 7408.3,
+   "mw": 6663.4,
    "group": "coal",
    "units": 17
   },
   "民營電廠-燃煤": {
-   "mw": 1199.2,
+   "mw": 1195.1,
    "group": "coal",
    "units": 2
   },
   "汽電共生": {
-   "mw": 551.4,
+   "mw": 565.4,
    "group": "cogen",
    "units": 1
   },
   "燃料油": {
-   "mw": 45.1,
+   "mw": 43.8,
    "group": "oil",
    "units": 11
   },
@@ -136,27 +136,27 @@
    "units": 21
   },
   "風力": {
-   "mw": 984.1,
+   "mw": 536.5,
    "group": "wind",
    "units": 31
   },
   "水力": {
-   "mw": 488.0,
+   "mw": 535.7,
    "group": "hydro",
    "units": 51
   },
   "儲能": {
-   "mw": 736.5,
+   "mw": 385.3,
    "group": "storage",
    "units": 11
   },
   "其它再生能源": {
-   "mw": 27.4,
+   "mw": 31.8,
    "group": "other_re",
    "units": 3
   },
   "儲能負載(Energy Storage System Load)": {
-   "mw": -15.0,
+   "mw": -10.4,
    "group": "storage",
    "units": 11
   }
