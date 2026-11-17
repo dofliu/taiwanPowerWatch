@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-17T00:56:33+08:00",
+ "updated": "2026-11-18T01:52:30+08:00",
  "granularity": "daily",
- "source_time": "2026-08-31",
- "peak_load_mw": 38148.0,
- "supply_capacity_mw": 43520.0,
- "reserve_mw": 5371.0,
- "reserve_pct": 14.08,
+ "source_time": "2026-10-31",
+ "peak_load_mw": 30528.0,
+ "supply_capacity_mw": 38497.0,
+ "reserve_mw": 7969.0,
+ "reserve_pct": 26.1,
  "status_text": null
 }
